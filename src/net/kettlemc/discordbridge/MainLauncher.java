@@ -1,4 +1,4 @@
-package net.kettlemc.plugin;
+package net.kettlemc.discordbridge;
 
 import javax.swing.JOptionPane;
 
