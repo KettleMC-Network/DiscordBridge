@@ -60,6 +60,7 @@ repositories {
 
 configurations {
     internalLibs
+    compile.exclude module: 'opus-java'
     implementation.extendsFrom(internalLibs)
 }
 
@@ -69,9 +70,8 @@ dependencies {
 
     this.addModularCompile('org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT', 'spigot', false)
     this.addModularCompile("net.luckperms:api:5.3", "luckperms", false)
-	this.addModularCompile('com.github.CuukyOfficial:CFW:master-SNAPSHOT', 'CFW', true)
 
-    this.addModularInternal('net.dv8tion:JDA:4.3.0_334', 'jda', false)
+    this.addModularInternal('net.dv8tion:JDA:5.0.0-alpha.4', 'jda', false)
 
 }
 
