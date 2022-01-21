@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.kettlemc.discordbridge.DiscordBridge;
+import net.kettlemc.discordbridge.discord.listener.MessageListener;
 
 import javax.security.auth.login.LoginException;
 
@@ -16,18 +17,25 @@ public class DiscordBot {
     private DiscordBridge plugin;
 
     public DiscordBot(DiscordBridge plugin) {
+        this.plugin = plugin;
         try {
             JDABuilder builder = JDABuilder.createDefault(plugin.getConfiguration().token);
             builder.setActivity(Activity.playing(plugin.getConfiguration().status));
             builder.setStatus(OnlineStatus.ONLINE);
             this.jda = builder.build();
+            jda.addEventListener(new MessageListener(this));
+
         } catch (LoginException e) {
             e.printStackTrace();
         }
     }
 
+    public DiscordBridge getPlugin() {
+        return this.plugin;
+    }
+
     public void shutdown() {
-        jda.shutdownNow();
+        jda.shutdown();
     }
 
     public TextChannel getTextChannelByID(long id) {
@@ -42,9 +50,15 @@ public class DiscordBot {
         sendMessage(getTextChannelByID(channelId), message);
     }
 
+    public void sendMessage(String message) {
+        sendMessage(plugin.getConfiguration().channel, message);
+    }
+
     public void sendEmbed() {
         // TODO
     }
+
+
 
 
 }

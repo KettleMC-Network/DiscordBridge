@@ -29,7 +29,7 @@ public class AsyncChatListener implements Listener {
 
         String message = plugin.getConfiguration().chatFormat.replace("%rank%", prefix).replace("%player%", name).replace("%msg%", msg);
 
-        plugin.getBot().sendMessage(plugin.getConfiguration().channel, message);
+        plugin.getBot().sendMessage(message);
     }
 
 }

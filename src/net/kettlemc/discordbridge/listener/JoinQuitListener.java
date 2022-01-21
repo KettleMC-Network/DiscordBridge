@@ -19,12 +19,12 @@ public class JoinQuitListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         String message = Utils.stripColor(event.getJoinMessage());
-        plugin.getBot().sendMessage(plugin.getConfiguration().channel, plugin.getConfiguration().joinFormat.replace("%msg%", message));
+        plugin.getBot().sendMessage(plugin.getConfiguration().joinFormat.replace("%msg%", message));
     }
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         String message = Utils.stripColor(event.getQuitMessage());
-        plugin.getBot().sendMessage(plugin.getConfiguration().channel, plugin.getConfiguration().quitFormat.replace("%msg%", message));
+        plugin.getBot().sendMessage(plugin.getConfiguration().quitFormat.replace("%msg%", message));
     }
 
 }
