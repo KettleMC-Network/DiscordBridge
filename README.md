@@ -1,3 +1,5 @@
-# Gradle Setup for KettleMC.net Plugins
+# 🌉 Discord Bridge
 
-Based on the [CFW](https://github.com/CuukyOfficial/CFW)/[VaroPlugin](https://github.com/CuukyOfficial/VaroPlugin) by Cuuky
+A simple plugin providing a bridge between your discord and minecraft chats.
+
+Partly based on the [CFW](https://github.com/CuukyOfficial/CFW) by Cuuky.
