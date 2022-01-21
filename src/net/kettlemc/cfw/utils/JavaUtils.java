@@ -1,4 +1,4 @@
-package de.cuuky.cfw.utils;
+package net.kettlemc.cfw.utils;
 
 import org.bukkit.ChatColor;
 

@@ -1,4 +1,4 @@
-package de.cuuky.cfw.configuration;
+package net.kettlemc.cfw.configuration;
 
 import java.io.File;
 
