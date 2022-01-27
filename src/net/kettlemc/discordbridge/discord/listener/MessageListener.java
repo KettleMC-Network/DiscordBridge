@@ -18,7 +18,7 @@ public class MessageListener extends ListenerAdapter {
     @Override
     public void onMessageReceived(MessageReceivedEvent event)
     {
-        if (event.isFromType(ChannelType.PRIVATE) || event.getAuthor().isBot())
+        if (event.isFromType(ChannelType.PRIVATE) || event.getAuthor().isBot() || event.getChannel().getIdLong() != bot.getPlugin().getConfiguration().channel)
             return;
         String message = bot.getPlugin().getConfiguration().mcChatFormat.replace("%name%", event.getAuthor().getName()).replace("%user%", event.getAuthor().getAsTag()).replace("%msg%", event.getMessage().getContentDisplay());
         Bukkit.getOnlinePlayers() .forEach( player -> {
