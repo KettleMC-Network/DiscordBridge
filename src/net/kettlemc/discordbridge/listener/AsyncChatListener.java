@@ -22,7 +22,9 @@ public class AsyncChatListener implements Listener {
 
         String prefix = Utils.getLuckPermsPrefix(event.getPlayer());
         String name = event.getPlayer().getDisplayName();
+        name = (plugin.getConfiguration().disableFormatting ? Utils.replaceFormats(name) : name);
         String msg = Utils.stripColor(event.getMessage());
+        msg = (plugin.getConfiguration().disableFormatting ? Utils.replaceFormats(msg) : msg);
 
         if (prefix == null)
             prefix = plugin.getConfiguration().defaultRank;

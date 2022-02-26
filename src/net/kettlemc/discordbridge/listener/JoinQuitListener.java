@@ -19,11 +19,13 @@ public class JoinQuitListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         String message = Utils.stripColor(event.getJoinMessage());
+        message =  (plugin.getConfiguration().disableFormatting ? message : Utils.replaceFormats(message));
         plugin.getBot().sendMessage(plugin.getConfiguration().joinFormat.replace("%msg%", message));
     }
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         String message = Utils.stripColor(event.getQuitMessage());
+        message =  (plugin.getConfiguration().disableFormatting ? message : Utils.replaceFormats(message));
         plugin.getBot().sendMessage(plugin.getConfiguration().quitFormat.replace("%msg%", message));
     }
 

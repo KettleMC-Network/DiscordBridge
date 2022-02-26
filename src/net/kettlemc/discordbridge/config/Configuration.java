@@ -9,7 +9,7 @@ public class Configuration {
     public String token, status, defaultRank;
     public String mcChatFormat, chatFormat, joinFormat, quitFormat, startupMessage, shutdownMessage;
     public long channel;
-    public boolean embed;
+    public boolean embed, showSkin, disableFormatting;
 
     public BasicConfigurationHandler getConfig() {
         return this.config;
@@ -23,7 +23,9 @@ public class Configuration {
         this.status = config.getString("bot.status", " auf KettleMC.net");
 
         this.embed = config.getBool("bot.messages.embeds.enabled", false);
-        this.embed = config.getBool("bot.messages.embeds.show-skin", true);
+        this.showSkin = config.getBool("bot.messages.embeds.show-skin", true);
+
+        this.disableFormatting = config.getBool("bot.messages.disable-format", true);
 
         this.mcChatFormat = config.getString("bot.messages.mc-chat-format", "&9DC &8| &7%user% &8» &7%msg%");
         this.chatFormat = config.getString("bot.messages.chat-format", ":speech_left: **[%rank%] %player% »** %msg%");
