@@ -7,7 +7,7 @@ public class Configuration {
     private BasicConfigurationHandler config;
 
     public String token, status, defaultRank;
-    public String mcChatFormat, chatFormat, joinFormat, quitFormat, startupMessage, shutdownMessage;
+    public String mcChatFormat, chatFormat, joinFormat, quitFormat, startupMessage, shutdownMessage, plannedShutdownMessage, clearLaggMessage;
     public long channel;
     public boolean embed, showSkin, disableFormatting;
 
@@ -28,11 +28,13 @@ public class Configuration {
         this.disableFormatting = config.getBool("bot.messages.disable-format", true);
 
         this.mcChatFormat = config.getString("bot.messages.mc-chat-format", "&9DC &8| &7%user% &8» &7%msg%");
+        this.plannedShutdownMessage = config.getString("bot.messages.planned-shutdown", "&9DC &8| &7Der Server startet in %seconds% Sekunden neu.");
         this.chatFormat = config.getString("bot.messages.chat-format", ":speech_left: **[%rank%] %player% »** %msg%");
         this.joinFormat = config.getString("bot.messages.join-format", ":arrow_right: %msg%");
         this.quitFormat = config.getString("bot.messages.quit-format", ":arrow_left: %msg%");
         this.startupMessage = config.getString("bot.messages.startup", ":white_check_mark: Server started!");
         this.shutdownMessage = config.getString("bot.messages.shutdown", ":negative_squared_cross_mark: Server stopped!");
+        this.clearLaggMessage = config.getString("bot.messages.clearlagg", ":broom: %items% have been cleared!");
 
         this.defaultRank = config.getString("bot.messages.default-rank", "Player");
     }

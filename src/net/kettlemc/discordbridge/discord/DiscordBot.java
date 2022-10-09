@@ -5,10 +5,16 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.interactions.commands.Command;
+import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 import net.kettlemc.discordbridge.DiscordBridge;
+import net.kettlemc.discordbridge.discord.command.SlashCommand;
+import net.kettlemc.discordbridge.discord.command.commands.ListSlashCommand;
+import net.kettlemc.discordbridge.discord.command.commands.StopServerCommand;
 import net.kettlemc.discordbridge.discord.listener.MessageListener;
 
 import javax.security.auth.login.LoginException;
+import java.util.List;
 
 public class DiscordBot {
 
@@ -28,6 +34,25 @@ public class DiscordBot {
         } catch (LoginException e) {
             e.printStackTrace();
         }
+    }
+
+    public void registerCommands() {
+
+        new ListSlashCommand().addToList();
+        new StopServerCommand().addToList();
+
+        // Delete any existing commands (prevents duplicates)
+        List<Command> cmds = this.jda.retrieveCommands().complete();
+        cmds.forEach(cmd -> cmd.delete());
+
+        // Add commands to guilds
+        this.jda.getGuilds().forEach(guild -> {
+            CommandListUpdateAction commands = guild.updateCommands();
+            SlashCommand.commandList.keySet().forEach(key -> {
+                SlashCommand.commandList.get(key).register(commands);
+            });
+            commands.queue();
+        });
     }
 
     public DiscordBridge getPlugin() {
