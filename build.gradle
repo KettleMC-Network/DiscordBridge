@@ -75,6 +75,7 @@ dependencies {
 
     this.addModularCompile('org.spigotmc:spigot-api:1.13.2-R0.1-SNAPSHOT', 'spigot', false)
     this.addModularCompile("net.luckperms:api:5.3", "luckperms", false)
+    compileOnly fileTree(dir: 'libs', include: '*.jar') // Local libs
 
     this.addModularInternal('net.dv8tion:JDA:5.0.0-alpha.4', 'jda', false)
 
