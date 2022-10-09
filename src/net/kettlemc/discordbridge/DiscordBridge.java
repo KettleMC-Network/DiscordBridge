@@ -33,6 +33,7 @@ public class DiscordBridge extends JavaPlugin {
             this.getLogger().warning("Please enter a token!");
         }
         if (Bukkit.getPluginManager().getPlugin("ClearLagg") != null) {
+            this.getLogger().info("Couldn't find ClearLagg, support disabled.");
             clearlaggEnabled = true;
         }
         this.registerBukkit();
