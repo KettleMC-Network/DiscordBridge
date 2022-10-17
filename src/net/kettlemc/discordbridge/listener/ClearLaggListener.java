@@ -24,7 +24,7 @@ public class ClearLaggListener implements Listener {
         lastCleared += event.getEntityList().size();
 
         // Event gets fired for every world, only send it once
-        if (event.getWorld() == Bukkit.getWorlds().get(0)) {
+        if (event.getWorld() == Bukkit.getWorlds().get(0) && lastCleared >= DiscordConfig.MIN_CLEARLAGG_ITEMS.getValue()) {
 
             new BukkitRunnable() {
 
