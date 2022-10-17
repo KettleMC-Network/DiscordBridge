@@ -3,10 +3,12 @@ import org.apache.tools.ant.filters.ReplaceTokens
 apply plugin: 'java-library'
 apply plugin: 'java'
 
-libsDirName = System.getenv("libsDirName") == null ? libsDirName : System.getenv("libsDirName")
+libsDirName = System.getenv('libsDirName') == null ? libsDirName : System.getenv('libsDirName')
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 compileJava.options.encoding = 'UTF-8'
+
+version = "2.0.0"
 
 sourceSets {
     main {
@@ -38,28 +40,15 @@ repositories {
     }
 	
 	maven {
-        url = "https://oss.sonatype.org/content/repositories/snapshots/"
-    }
-
-    maven {
-        url 'https://maven.sk89q.com/repo/'
+        url = 'https://oss.sonatype.org/content/repositories/snapshots/'
     }
     
     maven {
     	url 'https://m2.dv8tion.net/releases'
     }
-    
-    maven {
-        url = 'https://repo.extendedclip.com/content/repositories/placeholderapi/'
-    }
 
     maven {
         url 'https://jitpack.io'
-    }
-
-    maven {
-        url 'http://repo.mikeprimm.com'
-        allowInsecureProtocol true
     }
 }
 
@@ -70,14 +59,15 @@ configurations {
 }
 
 dependencies {
-	testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+	testImplementation('org.junit.jupiter:junit-jupiter-api:5.7.2')
+    testImplementation('org.junit.jupiter:junit-jupiter-engine:5.7.2')
 
     this.addModularCompile('org.spigotmc:spigot-api:1.13.2-R0.1-SNAPSHOT', 'spigot', false)
-    this.addModularCompile("net.luckperms:api:5.3", "luckperms", false)
+    this.addModularCompile('com.github.KettleMC-Network:Konfiguration:master-SNAPSHOT', 'konfiguration', true)
+    this.addModularCompile('net.dv8tion:JDA:5.0.0-alpha.4', 'jda', false)
+    this.addModularCompile('net.luckperms:api:5.3', 'luckperms', false)
     compileOnly fileTree(dir: 'libs', include: '*.jar') // Local libs
 
-    this.addModularInternal('net.dv8tion:JDA:5.0.0-alpha.4', 'jda', false)
 
 }
 
@@ -119,10 +109,10 @@ jar {
 processResources {
 	duplicatesStrategy = DuplicatesStrategy.INCLUDE
     from (sourceSets.main.resources.srcDirs) {
-        filter ReplaceTokens, tokens: [name: "DiscordBridge"]
-        filter ReplaceTokens, tokens: [version: "0.0.1-BETA"]
-        filter ReplaceTokens, tokens: [author: "KettleMC"]
-        filter ReplaceTokens, tokens: [main: "net.kettlemc.discordbridge.DiscordBridge"]
+        filter ReplaceTokens, tokens: [name: project.name]
+        filter ReplaceTokens, tokens: [version: version]
+        filter ReplaceTokens, tokens: [author: 'KettleMC']
+        filter ReplaceTokens, tokens: [main: 'net.kettlemc.discordbridge.DiscordBridge']
     }
 }
 

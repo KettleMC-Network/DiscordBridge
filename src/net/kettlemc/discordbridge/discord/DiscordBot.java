@@ -7,8 +7,9 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.interactions.commands.Command;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
-import net.kettlemc.discordbridge.DiscordBridge;
+import net.kettlemc.discordbridge.config.DiscordConfig;
 import net.kettlemc.discordbridge.discord.command.SlashCommand;
+import net.kettlemc.discordbridge.discord.command.SlashCommandListener;
 import net.kettlemc.discordbridge.discord.command.commands.ListSlashCommand;
 import net.kettlemc.discordbridge.discord.command.commands.StopServerCommand;
 import net.kettlemc.discordbridge.discord.listener.MessageListener;
@@ -18,18 +19,18 @@ import java.util.List;
 
 public class DiscordBot {
 
-
     private JDA jda;
-    private DiscordBridge plugin;
 
-    public DiscordBot(DiscordBridge plugin) {
-        this.plugin = plugin;
+    public DiscordBot() {
         try {
-            JDABuilder builder = JDABuilder.createDefault(plugin.getConfiguration().token);
-            builder.setActivity(Activity.playing(plugin.getConfiguration().status));
+
+            JDABuilder builder = JDABuilder.createDefault(DiscordConfig.DISCORD_TOKEN.getValue());
+            builder.setActivity(Activity.playing(DiscordConfig.DISCORD_BOT_STATUS.getValue()));
             builder.setStatus(OnlineStatus.ONLINE);
             this.jda = builder.build();
-            jda.addEventListener(new MessageListener(this));
+
+            jda.addEventListener(new MessageListener());
+            jda.addEventListener(new SlashCommandListener());
 
         } catch (LoginException e) {
             e.printStackTrace();
@@ -55,10 +56,6 @@ public class DiscordBot {
         });
     }
 
-    public DiscordBridge getPlugin() {
-        return this.plugin;
-    }
-
     public void shutdown() {
         jda.shutdown();
     }
@@ -76,7 +73,7 @@ public class DiscordBot {
     }
 
     public void sendMessage(String message) {
-        sendMessage(plugin.getConfiguration().channel, message);
+        sendMessage(DiscordConfig.DISCORD_CHANNEL_ID.getValue(), message);
     }
 
     public void sendEmbed() {

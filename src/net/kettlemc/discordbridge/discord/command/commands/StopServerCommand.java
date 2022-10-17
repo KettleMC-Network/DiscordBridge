@@ -10,10 +10,9 @@ import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 import net.kettlemc.discordbridge.DiscordBridge;
+import net.kettlemc.discordbridge.config.DiscordConfig;
 import net.kettlemc.discordbridge.discord.command.SlashCommand;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class StopServerCommand extends SlashCommand {
 
@@ -41,7 +40,7 @@ public class StopServerCommand extends SlashCommand {
         }
 
         event.reply("The server will stop in " + seconds + "seconds.");
-        Bukkit.getServer().broadcastMessage(DiscordBridge.getInstance().getConfiguration().plannedShutdownMessage.replace("%seconds%", String.valueOf(seconds)));
+        Bukkit.getServer().broadcastMessage(DiscordConfig.MINECRAFT_MESSAGE_RESTART.getValue().replace("%seconds%", String.valueOf(seconds)));
         Bukkit.getScheduler().runTaskLater(DiscordBridge.getInstance(), () -> Bukkit.getServer().shutdown(), seconds * 20L);
 
     }

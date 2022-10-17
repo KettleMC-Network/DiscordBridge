@@ -1,19 +1,13 @@
 package net.kettlemc.discordbridge.listener;
 
 import net.kettlemc.discordbridge.DiscordBridge;
+import net.kettlemc.discordbridge.config.DiscordConfig;
 import net.kettlemc.discordbridge.utils.Utils;
-import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class AsyncChatListener implements Listener {
-
-    private DiscordBridge plugin;
-
-    public AsyncChatListener(DiscordBridge plugin) {
-        this.plugin = plugin;
-    }
 
     @EventHandler
     public void onChat(AsyncPlayerChatEvent event) {
@@ -21,17 +15,20 @@ public class AsyncChatListener implements Listener {
             return;
 
         String prefix = Utils.getLuckPermsPrefix(event.getPlayer());
+        if (prefix == null) {
+            prefix = DiscordConfig.DEFAULT_RANK.getValue();
+        }
+
         String name = event.getPlayer().getDisplayName();
-        name = (plugin.getConfiguration().disableFormatting ? Utils.replaceFormats(name) : name);
+        name = (DiscordConfig.DISCORD_DISABLE_FORMATTING.getValue() ? Utils.replaceFormats(name) : name);
+
         String msg = Utils.stripColor(event.getMessage());
-        msg = (plugin.getConfiguration().disableFormatting ? Utils.replaceFormats(msg) : msg);
+        msg = (DiscordConfig.DISCORD_DISABLE_FORMATTING.getValue() ? Utils.replaceFormats(msg) : msg);
 
-        if (prefix == null)
-            prefix = plugin.getConfiguration().defaultRank;
 
-        String message = plugin.getConfiguration().chatFormat.replace("%rank%", prefix).replace("%player%", name).replace("%msg%", msg);
+        String message = DiscordConfig.DISCORD_MESSAGE_CHAT.getValue().replace("%rank%", prefix).replace("%player%", name).replace("%msg%", msg);
 
-        plugin.getBot().sendMessage(message);
+        DiscordBridge.getInstance().getBot().sendMessage(message);
     }
 
 }

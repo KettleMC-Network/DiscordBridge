@@ -2,14 +2,17 @@ package net.kettlemc.discordbridge.listener;
 
 import me.minebuilders.clearlag.events.EntityRemoveEvent;
 import net.kettlemc.discordbridge.DiscordBridge;
-import net.kettlemc.discordbridge.utils.Utils;
+import net.kettlemc.discordbridge.config.DiscordConfig;
+import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class ClearLaggListener implements Listener {
 
     private DiscordBridge plugin;
+
+    private static int lastCleared = 0;
 
     public ClearLaggListener(DiscordBridge plugin) {
         this.plugin = plugin;
@@ -18,9 +21,25 @@ public class ClearLaggListener implements Listener {
     @EventHandler
     public void onClear(EntityRemoveEvent event) {
 
-        String message = plugin.getConfiguration().clearLaggMessage.replace("%items%", String.valueOf(event.getEntityList().size()));
+        lastCleared += event.getEntityList().size();
 
-        plugin.getBot().sendMessage(message);
+        // Event gets fired for every world, only send it once
+        if (event.getWorld() == Bukkit.getWorlds().get(0)) {
+
+            new BukkitRunnable() {
+
+                @Override
+                public void run() {
+                    String message = DiscordConfig.DISCORD_MESSAGE_CLEARLAGG.getValue().replace("%items%", String.valueOf(lastCleared));
+                    plugin.getBot().sendMessage(message);
+                    lastCleared = 0;
+                }
+
+            }.runTaskLater(DiscordBridge.getInstance(), 40L);
+
+
+        }
+
     }
 
 }
