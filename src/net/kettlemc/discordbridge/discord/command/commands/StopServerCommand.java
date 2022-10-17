@@ -18,7 +18,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class StopServerCommand extends SlashCommand {
 
     public StopServerCommand() {
-        super("list");
+        super("stop");
     }
 
     @Override
