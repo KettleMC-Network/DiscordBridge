@@ -15,6 +15,7 @@ public class JoinQuitListener implements Listener {
         String message = Utils.stripColor(event.getJoinMessage());
         message =  (DiscordConfig.DISCORD_DISABLE_FORMATTING.getValue() ? Utils.replaceFormats(message) : message);
         DiscordBridge.getInstance().getBot().sendMessage(DiscordConfig.DISCORD_MESSAGE_JOIN.getValue().replace("%msg%", message));
+        DiscordBridge.getInstance().getBot().updateStatus();
     }
 
     @EventHandler
@@ -22,6 +23,7 @@ public class JoinQuitListener implements Listener {
         String message = Utils.stripColor(event.getQuitMessage());
         message =  (DiscordConfig.DISCORD_DISABLE_FORMATTING.getValue() ? Utils.replaceFormats(message) : message);
         DiscordBridge.getInstance().getBot().sendMessage(DiscordConfig.DISCORD_MESSAGE_QUIT.getValue().replace("%msg%", message));
+        DiscordBridge.getInstance().getBot().updateStatus();
     }
 
 }
