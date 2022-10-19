@@ -12,7 +12,8 @@ public class DiscordConfig {
     private static Configuration CONFIGURATION = new Configuration(DiscordBridge.getInstance().getDataFolder().toPath().resolve("config.json"));
 
     public static StringConfigEntry DISCORD_TOKEN = new StringConfigEntry(CONFIGURATION, "YOUR TOKEN", "settings.discord.token");
-    public static LongConfigEntry DISCORD_CHANNEL_ID = new LongConfigEntry(CONFIGURATION, -1l, "settings.discord.channel-id");
+    public static LongConfigEntry DISCORD_CHANNEL_ID = new LongConfigEntry(CONFIGURATION, Long.valueOf(1), "settings.discord.channel-id");
+    public static BooleanConfigEntry DISCORD_ALLOW_EVERY_CHANNEL_FOR_COMMANDS = new BooleanConfigEntry(CONFIGURATION, false, "settings.discord.commands-in-every-channel");
     public static StringConfigEntry DISCORD_BOT_STATUS = new StringConfigEntry(CONFIGURATION, " with %online% players", "settings.discord.status");
     public static BooleanConfigEntry DISCORD_DISABLE_FORMATTING = new BooleanConfigEntry(CONFIGURATION, true, "settings.discord.disable-formatting");
 
@@ -27,7 +28,9 @@ public class DiscordConfig {
     public static StringConfigEntry DISCORD_MESSAGE_CLEARLAGG = new StringConfigEntry(CONFIGURATION, ":broom: %items% have been cleared!", "messages.discord.clearlagg");
     public static StringConfigEntry DISCORD_MESSAGE_ONLINE_LIST = new StringConfigEntry(CONFIGURATION, ":family_mwgb: **Online (%online%):** %players%", "messages.discord.online");
     public static StringConfigEntry DISCORD_MESSAGE_NO_PLAYERS = new StringConfigEntry(CONFIGURATION, ":person_shrugging: No players online!", "messages.discord.no-players-online");
-    public static StringConfigEntry DISCORD_MESSAGE_RESTART = new StringConfigEntry(CONFIGURATION, ":person_shrugging: No players online!", "messages.discord.no-players-online");
+    public static StringConfigEntry DISCORD_MESSAGE_RESTART = new StringConfigEntry(CONFIGURATION, ":x: The server will restart in %seconds% seconds!", "messages.discord.restart.instant");
+    public static StringConfigEntry DISCORD_MESSAGE_INSTANT_RESTART = new StringConfigEntry(CONFIGURATION, ":x: The server will restart in %seconds% seconds!", "messages.discord.restart.timer");
+    public static StringConfigEntry DISCORD_MESSAGE_NO_PERMISSION = new StringConfigEntry(CONFIGURATION, ":x: You're not allowed to use this command!", "messages.discord.no-permission");
 
     public static StringConfigEntry MINECRAFT_MESSAGE_CHAT = new StringConfigEntry(CONFIGURATION, "&9DC &8| &7%user% &8» &7%msg%", "messages.minecraft.chat");
     public static StringConfigEntry MINECRAFT_MESSAGE_RESTART = new StringConfigEntry(CONFIGURATION, "&9DC &8| &7The server will restart in %seconds% seconds.", "messages.minecraft.restart");

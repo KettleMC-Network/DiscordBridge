@@ -23,7 +23,7 @@ public class StopServerCommand extends SlashCommand {
     @Override
     public void run(SlashCommandEvent event, Member member, TextChannel channel) {
         if (!member.hasPermission(Permission.ADMINISTRATOR)) {
-            event.reply("You're not allowed to use this command.").queue();
+            event.reply(DiscordConfig.DISCORD_MESSAGE_NO_PERMISSION.getValue()).queue();
             return;
         }
 
@@ -34,12 +34,12 @@ public class StopServerCommand extends SlashCommand {
         }
 
         if (seconds == 0) {
-            event.reply("The server has been stopped.").queue();
-            Bukkit.getServer().shutdown();
+            event.reply(DiscordConfig.DISCORD_MESSAGE_INSTANT_RESTART.getValue().replace("%seconds%", String.valueOf(seconds))).queue();
+            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "stop");
             return;
         }
 
-        event.reply("The server will stop in " + seconds + "seconds.").queue();
+        event.reply(DiscordConfig.DISCORD_MESSAGE_RESTART.getValue()).queue();
         Bukkit.getServer().broadcastMessage(DiscordConfig.MINECRAFT_MESSAGE_RESTART.getValue().replace("%seconds%", String.valueOf(seconds)));
         Bukkit.getScheduler().runTaskLater(DiscordBridge.getInstance(), () -> Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "stop"), seconds * 20L);
 
@@ -49,7 +49,7 @@ public class StopServerCommand extends SlashCommand {
     public void register(CommandListUpdateAction commands) {
         commands.addCommands(
                 new CommandData("stop", "Stops the server after a certain amount of seconds.")
-                .addOptions(new OptionData(OptionType.INTEGER, "seconds", "How many seconds should pass before the server stops").setRequired(true))
+                .addOptions(new OptionData(OptionType.INTEGER, "seconds", "How many seconds should pass before the server stops").setRequired(false))
         );
     }
 
