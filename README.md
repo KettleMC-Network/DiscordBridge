@@ -2,8 +2,6 @@
 
 A simple plugin providing a bridge between your discord and minecraft chats.
 
-Partly based on the [CFW](https://github.com/CuukyOfficial/CFW) by Cuuky.
-
 # Dependencies
 - JDK >= 17
 - Spigot o.ä. Server
@@ -17,11 +15,10 @@ Partly based on the [CFW](https://github.com/CuukyOfficial/CFW) by Cuuky.
           - handle incoming Minecraft and Discord commands
           - Setup config by methods from Configuration.java
     - src/net/kettlemc/discordbridge/config/*DiscordConfig.java*
-        - *Here are the important informations such as the **bot key** and the *channel-id* in a java file with a small configuration handler.*
+        - *Here are the important information loaded from the "config.json" in a java file.*
         - it's based on the configuration manager *Konfiguration*
         - Function:
           - defining methods to get the config values
-          - methods read the "config.json"
     - src/net/kettlemc/discordbridge/discord/*DiscordBot.java*
         - *Here is the Bot for Discord.*
         - Function:
