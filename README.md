@@ -16,12 +16,12 @@ Partly based on the [CFW](https://github.com/CuukyOfficial/CFW) by Cuuky.
         - Function:
           - handle incoming Minecraft and Discord commands
           - Setup config by methods from Configuration.java
-    - src/net/kettlemc/discordbridge/config/*Configuration.java*
+    - src/net/kettlemc/discordbridge/config/*DiscordConfig.java*
         - *Here are the important informations such as the **bot key** and the *channel-id* in a java file with a small configuration handler.*
-        - it's based on the configuration manager *GFW*
+        - it's based on the configuration manager *Konfiguration*
         - Function:
           - defining methods to get the config values
-          - methods read the "config.yml"
+          - methods read the "config.json"
     - src/net/kettlemc/discordbridge/discord/*DiscordBot.java*
         - *Here is the Bot for Discord.*
         - Function:
