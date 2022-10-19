@@ -2,7 +2,7 @@
 *.class
 
 # the config.json to protect people pushing their bot token
-src/net/kettlemc/discordbridge/config.json
+resources/config.json
 
 # Log file
 *.log
