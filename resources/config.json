@@ -1,0 +1,8 @@
+{
+    "settings": {
+        "discord": {
+		"token": "YOUR TOKEN",
+        	"channel-id": "-1l"
+        }
+    }
+}

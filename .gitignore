@@ -1,6 +1,9 @@
 # Compiled class file
 *.class
 
+# the config.json to protect people pushing their bot token
+resources/config.json
+
 # Log file
 *.log
 
