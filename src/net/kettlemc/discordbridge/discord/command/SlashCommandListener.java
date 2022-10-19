@@ -11,7 +11,7 @@ public class SlashCommandListener extends ListenerAdapter {
 
         SlashCommand command;
 
-        if ((command = SlashCommand.commandList.get(commandName)) != null) {
+        if ((command = SlashCommand.commandMap.get(commandName)) != null) {
             command.run(event, event.getMember(), event.getTextChannel());
         }
     }

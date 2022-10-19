@@ -30,7 +30,6 @@ public class DiscordBridge extends JavaPlugin {
         }
 
         this.bot = new DiscordBot();
-        this.bot.registerCommands();
 
         if (Bukkit.getPluginManager().getPlugin(CLEARLAGG_ID) == null) {
             this.getLogger().info("Couldn't find ClearLag, support disabled.");

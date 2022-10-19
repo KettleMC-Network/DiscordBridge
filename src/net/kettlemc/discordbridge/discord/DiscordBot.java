@@ -29,10 +29,12 @@ public class DiscordBot {
             builder.setStatus(OnlineStatus.ONLINE);
             this.jda = builder.build();
 
+            jda.awaitReady();
             jda.addEventListener(new MessageListener());
             jda.addEventListener(new SlashCommandListener());
+            this.registerCommands();
 
-        } catch (LoginException e) {
+        } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
         }
     }
@@ -44,13 +46,13 @@ public class DiscordBot {
 
         // Delete any existing commands (prevents duplicates)
         List<Command> cmds = this.jda.retrieveCommands().complete();
-        cmds.forEach(cmd -> cmd.delete());
+        cmds.forEach(cmd -> cmd.delete().queue());
 
         // Add commands to guilds
         this.jda.getGuilds().forEach(guild -> {
             CommandListUpdateAction commands = guild.updateCommands();
-            SlashCommand.commandList.keySet().forEach(key -> {
-                SlashCommand.commandList.get(key).register(commands);
+            SlashCommand.commandMap.keySet().forEach(key -> {
+                SlashCommand.commandMap.get(key).register(commands);
             });
             commands.queue();
         });
