@@ -23,7 +23,7 @@ public class StopServerCommand extends SlashCommand {
     @Override
     public void run(SlashCommandEvent event, Member member, TextChannel channel) {
         if (!member.hasPermission(Permission.ADMINISTRATOR)) {
-            event.reply("You're not allowed to use this command.");
+            event.reply("You're not allowed to use this command.").queue();
             return;
         }
 
@@ -34,14 +34,14 @@ public class StopServerCommand extends SlashCommand {
         }
 
         if (seconds == 0) {
-            event.reply("The server has been stopped.");
+            event.reply("The server has been stopped.").queue();
             Bukkit.getServer().shutdown();
             return;
         }
 
-        event.reply("The server will stop in " + seconds + "seconds.");
+        event.reply("The server will stop in " + seconds + "seconds.").queue();
         Bukkit.getServer().broadcastMessage(DiscordConfig.MINECRAFT_MESSAGE_RESTART.getValue().replace("%seconds%", String.valueOf(seconds)));
-        Bukkit.getScheduler().runTaskLater(DiscordBridge.getInstance(), () -> Bukkit.getServer().shutdown(), seconds * 20L);
+        Bukkit.getScheduler().runTaskLater(DiscordBridge.getInstance(), () -> Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "stop"), seconds * 20L);
 
     }
 
