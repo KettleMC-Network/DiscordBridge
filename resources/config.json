@@ -1,8 +1,35 @@
 {
     "settings": {
         "discord": {
-		"token": "YOUR TOKEN",
-        	"channel-id": "-1l"
+            "token": "YOUR TOKEN",
+            "channel-id": -1,
+            "status": " with %online% players",
+            "disable-formatting": true,
+            "embed": {
+                "enabled": false,
+                "show-skin": true
+            }
+        },
+        "default-rank": "Player",
+        "clearlagg": {
+            "enabled": true,
+            "min-items": 100
+        }
+    },
+    "messages": {
+        "discord": {
+            "chat": ":speech_left: **[%rank%] %player% »** %msg%",
+            "join": ":arrow_right: %msg%",
+            "quit": ":arrow_left: %msg%",
+            "startup": ":white_check_mark: Server started!",
+            "shutdown": ":negative_squared_cross_mark: Server stopped!",
+            "clearlagg": ":broom: %items% have been cleared!",
+            "online": ":family_mwgb: **Online (%online%):** %players%",
+            "no-players-online": ":person_shrugging: No players online!"
+        },
+        "minecraft": {
+            "chat": "&9DC &8| &7%user% &8» &7%msg%",
+            "restart": "&9DC &8| &7The server will restart in %seconds% seconds."
         }
     }
 }
