@@ -3,6 +3,7 @@ package net.kettlemc.discordbridge.utils;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.user.User;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.regex.Pattern;
@@ -34,6 +35,14 @@ public class Utils {
         for (String str : FORMAT_CHARS)
             string = string.replace(str, "\\" + str);
         return string;
+    }
+
+    public static int getPlayerSize() {
+        int count = 0;
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            count++;
+        }
+        return count;
     }
 
 }
