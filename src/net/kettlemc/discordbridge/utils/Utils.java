@@ -9,8 +9,6 @@ import java.util.regex.Pattern;
 
 public class Utils {
 
-    private static final String[] FORMAT_CHARS = {"*", "_", "~", "`"};
-
     private static LuckPerms luckperms = LuckPermsProvider.get();
 
     public static String getLuckPermsPrefix(Player player) {
@@ -27,12 +25,5 @@ public class Utils {
         }
 
         return COLOR_PATTERN.matcher(input).replaceAll("");
-    }
-
-    // replaces all format chars with their non-formatting version
-    public static String replaceFormats(String string) {
-        for (String str : FORMAT_CHARS)
-            string = string.replace(str, "\\" + str);
-        return string;
     }
 }
