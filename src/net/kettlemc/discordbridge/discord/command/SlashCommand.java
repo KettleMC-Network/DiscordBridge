@@ -1,8 +1,8 @@
 package net.kettlemc.discordbridge.discord.command;
 
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
+import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 import net.kettlemc.discordbridge.DiscordBridge;
 
@@ -18,7 +18,7 @@ public abstract class SlashCommand {
         this.name = name;
     }
 
-    public abstract void run(SlashCommandEvent event, Member member, TextChannel channel);
+    public abstract void run(SlashCommandInteractionEvent event, Member member, MessageChannel channel);
     public abstract void register(CommandListUpdateAction commands);
 
     public void addToList() {
