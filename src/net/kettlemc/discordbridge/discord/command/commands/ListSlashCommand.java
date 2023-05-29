@@ -1,9 +1,9 @@
 package net.kettlemc.discordbridge.discord.command.commands;
 
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
-import net.dv8tion.jda.api.interactions.commands.build.CommandData;
+import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import net.kettlemc.discordbridge.config.DiscordConfig;
@@ -18,7 +18,7 @@ public class ListSlashCommand extends SlashCommand {
     }
 
     @Override
-    public void run(SlashCommandEvent event, Member member, TextChannel channel) {
+    public void run(SlashCommandInteractionEvent event, Member member, MessageChannel channel) {
         int count = 0;
         StringBuilder players = new StringBuilder();
 
@@ -40,7 +40,7 @@ public class ListSlashCommand extends SlashCommand {
     @Override
     public void register(CommandListUpdateAction commands) {
         commands.addCommands(
-                new CommandData("list", "Lists all players on the server"));
+                Commands.slash("list", "Lists all players on the server"));
     }
 
 }

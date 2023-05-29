@@ -4,8 +4,9 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.interactions.commands.Command;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 import net.kettlemc.discordbridge.config.DiscordConfig;
 import net.kettlemc.discordbridge.discord.command.SlashCommand;
@@ -13,10 +14,6 @@ import net.kettlemc.discordbridge.discord.command.SlashCommandListener;
 import net.kettlemc.discordbridge.discord.command.commands.ListSlashCommand;
 import net.kettlemc.discordbridge.discord.command.commands.StopServerCommand;
 import net.kettlemc.discordbridge.discord.listener.MessageListener;
-
-import javax.security.auth.login.LoginException;
-
-import org.bukkit.Bukkit;
 
 import java.util.List;
 
@@ -30,6 +27,7 @@ public class DiscordBot {
             JDABuilder builder = JDABuilder.createDefault(DiscordConfig.DISCORD_TOKEN.getValue());
             builder.setActivity(Activity.playing(DiscordConfig.DISCORD_BOT_STATUS.getValue().replace("%online%", String.valueOf(Bukkit.getOnlinePlayers().size()))));
             builder.setStatus(OnlineStatus.ONLINE);
+            builder.enableIntents(GatewayIntent.MESSAGE_CONTENT);
             this.jda = builder.build();
 
             jda.awaitReady();
@@ -37,7 +35,7 @@ public class DiscordBot {
             jda.addEventListener(new SlashCommandListener());
             this.registerCommands();
 
-        } catch (LoginException | InterruptedException e) {
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
@@ -65,16 +63,16 @@ public class DiscordBot {
         jda.shutdown();
     }
 
-    public TextChannel getTextChannelByID(long id) {
+    public MessageChannel getMessageChannelById(long id) {
         return jda.getTextChannelById(id);
     }
 
-    public void sendMessage(TextChannel channel, String message) {
+    public void sendMessage(MessageChannel channel, String message) {
         channel.sendMessage(message).queue();
     }
 
     public void sendMessage(long channelId, String message) {
-        sendMessage(getTextChannelByID(channelId), message);
+        sendMessage(getMessageChannelById(channelId), message);
     }
 
     public void sendMessage(String message) {

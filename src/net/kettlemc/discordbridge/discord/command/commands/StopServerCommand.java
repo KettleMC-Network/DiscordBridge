@@ -2,11 +2,11 @@ package net.kettlemc.discordbridge.discord.command.commands;
 
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
+import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
-import net.dv8tion.jda.api.interactions.commands.build.CommandData;
+import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 import net.kettlemc.discordbridge.DiscordBridge;
@@ -21,7 +21,7 @@ public class StopServerCommand extends SlashCommand {
     }
 
     @Override
-    public void run(SlashCommandEvent event, Member member, TextChannel channel) {
+    public void run(SlashCommandInteractionEvent event, Member member, MessageChannel channel) {
         if (!member.hasPermission(Permission.ADMINISTRATOR)) {
             event.reply(DiscordConfig.DISCORD_MESSAGE_NO_PERMISSION.getValue()).queue();
             return;
@@ -48,7 +48,7 @@ public class StopServerCommand extends SlashCommand {
     @Override
     public void register(CommandListUpdateAction commands) {
         commands.addCommands(
-                new CommandData("stop", "Stops the server after a certain amount of seconds.")
+                Commands.slash("stop", "Stops the server after a certain amount of seconds.")
                 .addOptions(new OptionData(OptionType.INTEGER, "seconds", "How many seconds should pass before the server stops").setRequired(false))
         );
     }
