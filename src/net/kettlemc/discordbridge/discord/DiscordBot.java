@@ -14,6 +14,7 @@ import net.kettlemc.discordbridge.discord.command.SlashCommandListener;
 import net.kettlemc.discordbridge.discord.command.commands.ListSlashCommand;
 import net.kettlemc.discordbridge.discord.command.commands.StopServerCommand;
 import net.kettlemc.discordbridge.discord.listener.MessageListener;
+import org.bukkit.Bukkit;
 
 import java.util.List;
 
@@ -52,9 +53,7 @@ public class DiscordBot {
         // Add commands to guilds
         this.jda.getGuilds().forEach(guild -> {
             CommandListUpdateAction commands = guild.updateCommands();
-            SlashCommand.commandMap.keySet().forEach(key -> {
-                SlashCommand.commandMap.get(key).register(commands);
-            });
+            SlashCommand.commandMap.keySet().forEach(key -> SlashCommand.commandMap.get(key).register(commands));
             commands.queue();
         });
     }
