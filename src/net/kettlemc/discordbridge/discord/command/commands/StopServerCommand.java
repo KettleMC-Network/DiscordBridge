@@ -39,7 +39,7 @@ public class StopServerCommand extends SlashCommand {
             return;
         }
 
-        event.reply(DiscordConfig.DISCORD_MESSAGE_RESTART.getValue()).queue();
+        event.reply(DiscordConfig.DISCORD_MESSAGE_RESTART.getValue().replace("%seconds%", String.valueOf(seconds))).queue();
         Bukkit.getServer().broadcastMessage(DiscordConfig.MINECRAFT_MESSAGE_RESTART.getValue().replace("%seconds%", String.valueOf(seconds)));
         Bukkit.getScheduler().runTaskLater(DiscordBridge.getInstance(), () -> Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "stop"), seconds * 20L);
 
