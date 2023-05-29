@@ -14,12 +14,11 @@ public class MessageListener extends ListenerAdapter {
     {
         if (event.isFromType(ChannelType.PRIVATE) || event.getAuthor().isBot() || event.getChannel().getIdLong() != DiscordConfig.DISCORD_CHANNEL_ID.getValue())
             return;
-        String message = DiscordConfig.MINECRAFT_MESSAGE_CHAT.getValue().replace("%name%", event.getAuthor().getName()).replace("%user%", event.getAuthor().getAsTag()).replace("%msg%", event.getMessage().getContentDisplay());
-        Bukkit.getOnlinePlayers().forEach(player -> {
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
-        });
-        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', message));
 
+        String message = DiscordConfig.MINECRAFT_MESSAGE_CHAT.getValue().replace("%name%", event.getAuthor().getName()).replace("%user%", event.getAuthor().getAsTag()).replace("%msg%", event.getMessage().getContentDisplay());
+
+        Bukkit.getOnlinePlayers().forEach(player -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', message)));
+        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', message));
 
     }
 }
