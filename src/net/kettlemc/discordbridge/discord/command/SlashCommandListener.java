@@ -13,8 +13,9 @@ public class SlashCommandListener extends ListenerAdapter {
         SlashCommand command;
 
         if ((command = SlashCommand.commandMap.get(commandName)) != null) {
-            if (DiscordConfig.DISCORD_ALLOW_EVERY_CHANNEL_FOR_COMMANDS.getValue() || event.getChannel().getIdLong() == DiscordConfig.DISCORD_CHANNEL_ID.getValue())
-            command.run(event, event.getMember(), event.getMessageChannel());
+            if (DiscordConfig.DISCORD_ALLOW_EVERY_CHANNEL_FOR_COMMANDS.getValue() || event.getChannel().getIdLong() == DiscordConfig.DISCORD_CHANNEL_ID.getValue()) {
+                command.run(event, event.getMember(), event.getMessageChannel());
+            }
         }
     }
 }

@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public abstract class SlashCommand {
 
-    public static HashMap<String, SlashCommand> commandMap = new HashMap();
+    public static HashMap<String, SlashCommand> commandMap = new HashMap<>();
 
     private String name;
 
@@ -22,9 +22,10 @@ public abstract class SlashCommand {
     public abstract void register(CommandListUpdateAction commands);
 
     public void addToList() {
-        if (!SlashCommand.commandMap.containsKey(this.getName()))
+        if (!SlashCommand.commandMap.containsKey(this.getName())) {
             DiscordBridge.getInstance().getLogger().info("Adding command " + this.getName() + " to the list.");
             SlashCommand.commandMap.put(this.getName(), this);
+        }
     }
 
     public String getName() {
