@@ -12,7 +12,7 @@ public abstract class SlashCommand {
 
     public static HashMap<String, SlashCommand> commandMap = new HashMap<>();
 
-    private String name;
+    private final String name;
 
     public SlashCommand(String name) {
         this.name = name;
