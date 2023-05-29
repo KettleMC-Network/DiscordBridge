@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class Utils {
 
-    private static LuckPerms luckperms = LuckPermsProvider.get();
+    private static final LuckPerms luckperms = LuckPermsProvider.get();
 
     public static String getLuckPermsPrefix(Player player) {
         User user = luckperms.getUserManager().getUser(player.getUniqueId());

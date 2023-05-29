@@ -39,8 +39,7 @@ public class ListSlashCommand extends SlashCommand {
 
     @Override
     public void register(CommandListUpdateAction commands) {
-        commands.addCommands(
-                Commands.slash("list", "Lists all players on the server"));
+        commands.addCommands(Commands.slash("list", "Lists all players on the server"));
     }
 
 }

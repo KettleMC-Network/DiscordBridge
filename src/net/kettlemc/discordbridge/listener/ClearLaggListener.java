@@ -10,7 +10,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class ClearLaggListener implements Listener {
 
-    private DiscordBridge plugin;
+    private final DiscordBridge plugin;
 
     private static int lastCleared = 0;
 

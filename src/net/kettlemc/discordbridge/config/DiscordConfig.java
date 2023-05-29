@@ -9,10 +9,10 @@ import net.kettlemc.konfiguration.entry.StringConfigEntry;
 
 public class DiscordConfig {
 
-    private static Configuration CONFIGURATION = new Configuration(DiscordBridge.getInstance().getDataFolder().toPath().resolve("config.json"));
+    private static final Configuration CONFIGURATION = new Configuration(DiscordBridge.getInstance().getDataFolder().toPath().resolve("config.json"));
 
     public static StringConfigEntry DISCORD_TOKEN = new StringConfigEntry(CONFIGURATION, "YOUR TOKEN", "settings.discord.token");
-    public static LongConfigEntry DISCORD_CHANNEL_ID = new LongConfigEntry(CONFIGURATION, Long.valueOf(1), "settings.discord.channel-id");
+    public static LongConfigEntry DISCORD_CHANNEL_ID = new LongConfigEntry(CONFIGURATION, 1L, "settings.discord.channel-id");
     public static BooleanConfigEntry DISCORD_ALLOW_EVERY_CHANNEL_FOR_COMMANDS = new BooleanConfigEntry(CONFIGURATION, false, "settings.discord.commands-in-every-channel");
     public static StringConfigEntry DISCORD_BOT_STATUS = new StringConfigEntry(CONFIGURATION, " with %online% players", "settings.discord.status");
     public static BooleanConfigEntry DISCORD_DISABLE_FORMATTING = new BooleanConfigEntry(CONFIGURATION, true, "settings.discord.disable-formatting");
