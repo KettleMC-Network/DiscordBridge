@@ -1,5 +1,6 @@
 package net.kettlemc.discordbridge.listener;
 
+import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import net.kettlemc.discordbridge.DiscordBridge;
 import net.kettlemc.discordbridge.config.DiscordConfig;
 import net.kettlemc.discordbridge.utils.Utils;
@@ -20,10 +21,10 @@ public class AsyncChatListener implements Listener {
         }
 
         String name = event.getPlayer().getDisplayName();
-        name = (DiscordConfig.DISCORD_DISABLE_FORMATTING.getValue() ? Utils.replaceFormats(name) : name);
+        name = (DiscordConfig.DISCORD_DISABLE_FORMATTING.getValue() ? MarkdownSanitizer.escape(name, true) : name);
 
         String msg = Utils.stripColor(event.getMessage());
-        msg = (DiscordConfig.DISCORD_DISABLE_FORMATTING.getValue() ? Utils.replaceFormats(msg) : msg);
+        msg = (DiscordConfig.DISCORD_DISABLE_FORMATTING.getValue() ? MarkdownSanitizer.escape(msg, true) : msg);
 
 
         String message = DiscordConfig.DISCORD_MESSAGE_CHAT.getValue().replace("%rank%", prefix).replace("%player%", name).replace("%msg%", msg);

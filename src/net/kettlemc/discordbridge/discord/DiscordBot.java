@@ -13,9 +13,11 @@ import net.kettlemc.discordbridge.discord.command.SlashCommandListener;
 import net.kettlemc.discordbridge.discord.command.commands.ListSlashCommand;
 import net.kettlemc.discordbridge.discord.command.commands.StopServerCommand;
 import net.kettlemc.discordbridge.discord.listener.MessageListener;
-import net.kettlemc.discordbridge.utils.Utils;
 
 import javax.security.auth.login.LoginException;
+
+import org.bukkit.Bukkit;
+
 import java.util.List;
 
 public class DiscordBot {
@@ -26,7 +28,7 @@ public class DiscordBot {
         try {
 
             JDABuilder builder = JDABuilder.createDefault(DiscordConfig.DISCORD_TOKEN.getValue());
-            builder.setActivity(Activity.playing(DiscordConfig.DISCORD_BOT_STATUS.getValue().replace("%online%", String.valueOf(Utils.getPlayerSize()))));
+            builder.setActivity(Activity.playing(DiscordConfig.DISCORD_BOT_STATUS.getValue().replace("%online%", String.valueOf(Bukkit.getOnlinePlayers().size()))));
             builder.setStatus(OnlineStatus.ONLINE);
             this.jda = builder.build();
 
@@ -88,7 +90,7 @@ public class DiscordBot {
     }
 
     public void updateStatus() {
-        String status = DiscordConfig.DISCORD_BOT_STATUS.getValue().replace("%online%", String.valueOf(Utils.getPlayerSize()));
+        String status = DiscordConfig.DISCORD_BOT_STATUS.getValue().replace("%online%", String.valueOf(Bukkit.getOnlinePlayers().size()));
         this.getJDA().getPresence().setActivity(Activity.playing(status));
     }
 }

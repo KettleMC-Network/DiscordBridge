@@ -5,9 +5,9 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
+import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import net.kettlemc.discordbridge.config.DiscordConfig;
 import net.kettlemc.discordbridge.discord.command.SlashCommand;
-import net.kettlemc.discordbridge.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -28,7 +28,7 @@ public class ListSlashCommand extends SlashCommand {
             count++;
         }
 
-        String playerList = DiscordConfig.DISCORD_DISABLE_FORMATTING.getValue() ? Utils.replaceFormats(players.toString()) : players.toString();
+        String playerList = DiscordConfig.DISCORD_DISABLE_FORMATTING.getValue() ? MarkdownSanitizer.escape(players.toString(), true) : players.toString();
 
         if (count != 0) {
             event.reply(DiscordConfig.DISCORD_MESSAGE_ONLINE_LIST.getValue().replace("%players%", playerList).replace("%online%", String.valueOf(count))).queue();
