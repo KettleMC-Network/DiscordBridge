@@ -1,3 +1,5 @@
+### ⚠ This project is archived and has been replaced by [kEssentials](https://github.com/KettleMC-Network/kEssentials).
+
 # 🌉 Discord Bridge
 
 A simple plugin providing a bridge between your discord and minecraft chats.
